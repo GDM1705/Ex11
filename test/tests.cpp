@@ -1,4 +1,4 @@
-// Copyright 2020 Golovanov
+//  Copyright 2021 Golovanov
 
 #include <gtest/gtest.h>
 #include <string>
@@ -24,12 +24,4 @@ TEST(train, test3) {
         train.addCageInTrain();
     }
     EXPECT_EQ(1, train.sumCage());
-}
-
-TEST(train, test4) {
-    Train train;
-    for (int i = 0; i < 4; i++) {
-        train.addCageInTrain();
-    }
-    EXPECT_EQ(4, train.sumCage());
 }
