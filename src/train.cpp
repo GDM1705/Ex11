@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Golovanov
+﻿//  Copyright  2021  Golovanov
 
 #include "train.h"
 
@@ -22,8 +22,7 @@ void Train::addCage(bool _light) {
         last = new_cage;
         new_cage->next = first;
         first->prev = new_cage;
-    }
-    else {
+    } else {
         first = new_cage;
         first->next = first;
         first->prev = first;
@@ -63,8 +62,7 @@ unsigned int Train::getLenght() const {
         }
         if (cage->get() == false) {
             return steps;
-        }
-        else {
+        } else {
             steps = 0;
         }
     }
