@@ -6,34 +6,39 @@
 
 #include "train.h"
 
-int main(int argc, char** argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
+TEST(TrainTests, test1) {
+    Cage* c = new Cage();
+    EXPECT_EQ(c->get(), false);
+    c->on();
+    EXPECT_EQ(c->get(), true);
 }
 
-TEST(Train, test1) {
-    Train train;
-    EXPECT_EQ(0, train.getLenght());
+TEST(TrainTests, test2) {
+    Cage* f = new Cage();
+    Cage* s = new Cage();
+    f->on();
+    Train tr = Train(f, s);
+    testing::internal::CaptureStdout();
+    tr.printCagesState();
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "Number: 0; Light is on\nNumber: 1; Light is off\n");
 }
 
-TEST(Train, test2) {
-    Train train;
-    std::random_device rd;
-    std::mt19937 mersenne(rd());
-
-    for (size_t i = 0; i < 10; i++) {
-        train.addCage(mersenne() % 2);
-    }
-
-    EXPECT_EQ(10, train.getLenght());
-}
-
-TEST(Train, test3) {
-    Train train;
-    std::random_device rd;
-    std::mt19937 mersenne(rd());
-
-    train.addCage(mersenne() % 2);
-
-    EXPECT_EQ(1, train.getLenght());
+TEST(TrainTests, test3) {
+    Cage* f = new Cage();
+    Cage* s = new Cage();
+    Cage* t = new Cage();
+    Cage* fo = new Cage();
+    Cage* fi = new Cage();
+    Cage* si = new Cage();
+    Cage* se = new Cage();
+    f->on();
+    fi->on();
+    Train tr = Train(f, s);
+    tr.addCage(t, true);
+    tr.addCage(fo, true);
+    tr.addCage(fi, true);
+    tr.addCage(si, true);
+    tr.addCage(se, true);
+    EXPECT_EQ(tr.findLength(), 7);
 }
