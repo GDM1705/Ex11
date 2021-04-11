@@ -1,44 +1,35 @@
 // Copyright 2020 Golovanov
 
 #include <gtest/gtest.h>
-
-#include <random>
-
+#include <string>
 #include "train.h"
 
-TEST(TrainTests, test1) {
-    Cage* c = new Cage();
-    EXPECT_EQ(c->get(), false);
-    c->on();
-    EXPECT_EQ(c->get(), true);
+TEST(train, test1) {
+    Train train;
+    for (int i = 0; i < 100; i++) {
+        train.addCageInTrain();
+    }
+    EXPECT_EQ(100, train.sumCage());
 }
 
-TEST(TrainTests, test2) {
-    Cage* f = new Cage();
-    Cage* s = new Cage();
-    f->on();
-    Train tr = Train(f, s);
-    testing::internal::CaptureStdout();
-    tr.printCagesState();
-    std::string output = testing::internal::GetCapturedStdout();
-    EXPECT_EQ(output, "Number: 0; Light is on\nNumber: 1; Light is off\n");
+TEST(train, test2) {
+    Cage cage;
+    cage.on();
+    EXPECT_EQ(true, cage.get());
 }
 
-TEST(TrainTests, test3) {
-    Cage* f = new Cage();
-    Cage* s = new Cage();
-    Cage* t = new Cage();
-    Cage* fo = new Cage();
-    Cage* fi = new Cage();
-    Cage* si = new Cage();
-    Cage* se = new Cage();
-    f->on();
-    fi->on();
-    Train tr = Train(f, s);
-    tr.addCage(t, true);
-    tr.addCage(fo, true);
-    tr.addCage(fi, true);
-    tr.addCage(si, true);
-    tr.addCage(se, true);
-    EXPECT_EQ(tr.findLength(), 7);
+TEST(train, test3) {
+    Train train;
+    for (int i = 0; i < 1; i++) {
+        train.addCageInTrain();
+    }
+    EXPECT_EQ(1, train.sumCage());
+}
+
+TEST(train, test4) {
+    Train train;
+    for (int i = 0; i < 4; i++) {
+        train.addCageInTrain();
+    }
+    EXPECT_EQ(4, train.sumCage());
 }
