@@ -7,17 +7,11 @@
 #include "train.h"
 
 int main() {
-    Train train;
-    std::random_device rd;
-    std::mt19937 mersenne(rd());
-
-    for (size_t i = 0; i < 10; i++) {
-        train.addCage(mersenne() % 2);
+     Train train;
+    for (int i = 0; i < 100; ++i) {
+        train.addCageInTrain();
     }
-
-    train.print();
-    std::cout << train.getLenght() << std::endl;
-    train.print();
-
+    std::cout << train.sumCage() << std::endl;
+    if (100 == train.sumCage()) std::cout << "true" << std::endl;
     return 0;
 }
